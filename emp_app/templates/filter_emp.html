@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OEMS - Filter Employees</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+      .FE{
+        text-decoration: underline;
+        text-underline-offset: 0.5rem;
+        text-decoration-thickness: 0.15rem;
+      }
+      .form-cont{
+        width: 50rem;
+        font-weight: 600;
+      }
+      .form-cont input, .form-cont select{
+        border: 0.05rem solid black;
+      }
+    </style>
+  </head>
+  <body>
+    
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show my-2"  role="alert">
+      <strong>{{message}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+      <h1 class="text-center my-3 FE">Filter Employees</h1>
+
+      <div class="container form-cont my-5">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="name" class="form-label">Employee Name:</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Firstname or Lastname">
+          </div>
+          <select class="form-select form-select-lg mb-3" name="department" aria-label=".form-select-lg example">
+            <option selected value>Select Department</option>
+            {% for i in dept %}
+            <option value="{{i.id}}">{{i.name}} - {{i.location}}</option>
+            {% endfor %}
+          </select>
+          <select class="form-select form-select-lg mb-3" name="role" aria-label=".form-select-lg example">
+            <option selected value>Select Role</option>
+            {% for j in role %}
+            <option value="{{j.id}}">{{j.name}}</option>
+            {% endfor %}
+          </select>
+  
+          <button type="submit" class="btn btn-primary float-end my-2">Get Details</button>
+        </form>
+        
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
